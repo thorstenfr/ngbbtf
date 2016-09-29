@@ -34,6 +34,39 @@ angular.module('bbtf', ['ionic'])
 
 .controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate) {
 
+// erstelle ein ratings
+  $scope.createRating = function(pupil, index) {
+	  
+	 if(!$scope.activeSubject || !pupil) {
+      return;
+    }
+	$scope.activeSubject.pupils[index].ratings.push({
+		datum: "2016-01-31"
+	});
+	
+	 // Inefficient, but save all the subjects
+    Subjects.save($scope.subjects);
+
+   
+  }
+  
+  // erstelle ein Teufelcehn
+  $scope.createTeufelchen = function(pupil, index) {
+	  
+	 if(!$scope.activeSubject || !pupil) {
+      return;
+    }
+	$scope.activeSubject.pupils[index].teufelchen.push({
+		datum: "2016-01-31"
+	});
+	
+	 // Inefficient, but save all the subjects
+    Subjects.save($scope.subjects);
+
+   
+  }
+
+
   // A utility function for creating a new subject
   // with the given subjectTitle
   var createSubject = function(subjectTitle) {
@@ -64,6 +97,13 @@ angular.module('bbtf', ['ionic'])
     Subjects.setLastActiveIndex(index);
     $ionicSideMenuDelegate.toggleLeft(false);
   };
+  
+  // Pupil geklickt, Rating hinzufügen
+  $scope.addRating = function(pupil, index) {
+	  
+  };
+  
+  
 
   // Create our modal
   $ionicModal.fromTemplateUrl('new-pupil.html', function(modal) {
@@ -77,7 +117,9 @@ angular.module('bbtf', ['ionic'])
       return;
     }
     $scope.activeSubject.pupils.push({
-      name: pupil.name
+      name: pupil.name, 
+	  ratings: [],
+	  teufelchen: []
     });
     $scope.pupilModal.hide();
 

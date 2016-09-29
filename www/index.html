@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Todo</title>
+    <title>Bienchem by Thorsten Freimann</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -31,8 +31,9 @@
       <ion-content scroll="false" >
 		<!-- our list and list items -->
 		<ion-list>
-		  <ion-item ng-repeat="pupil in activeSubject.pupils">
-			{{pupil.name}}
+		  <ion-item ng-repeat="pupil in activeSubject.pupils" ng-click="createRating(pupil, $index)" 
+		  on-hold="createTeufelchen(pupil, $index)">
+			{{pupil.name}}  <span class="badge badge-assertive"> {{pupil.ratings.length - pupil.teufelchen.length}} </span>
 		  </ion-item>
 		</ion-list>
       </ion-content>
