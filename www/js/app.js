@@ -1,10 +1,11 @@
-angular.module('bbtf', ['ionic'])
+
+var app = angular.module('bbtf', ['ionic']); 
 /**
  * The Subjects factory handles saving and loading subjects
  * from local storage, and also lets us save and load the
  * last active subjects index.
  */
-.factory('Subjects', function() {
+app.factory('Subjects', function() {
   return {
     all: function() {
       var subjectString = window.localStorage['subjects'];
@@ -32,7 +33,29 @@ angular.module('bbtf', ['ionic'])
   }
 })
 
-.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate) {
+
+
+app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate) {
+ 
+ 
+
+$scope.doContactPickerTest = function() {
+  	alert("Halloa");
+	 // $scope.pupil.name = "Joe Due";	
+	 $scope.pupil.name = "Joe";	
+  	
+  }
+
+$scope.edit = function(pupil) {
+    alert('Edit Item: ' + pupil.name);
+  };
+  $scope.delete = function(pupil) {  	
+  	$scope.activeSubject.pupils.splice($scope.activeSubject.pupils.indexOf(pupil), 1);  	
+
+  	// Inefficient, but save all the subjects
+    Subjects.save($scope.subjects);
+
+  };
 
 // erstelle ein ratings
   $scope.createRating = function(pupil, index) {
@@ -49,6 +72,18 @@ angular.module('bbtf', ['ionic'])
 
    
   }
+
+  // Hole Kontakt aus Adressbuch
+  $scope.doContactPicker = function() {
+  	navigator.contacts.pickContact(function(contact){  		
+  		var p = {name: contact.displayName};
+	 	$scope.createPupil(p);  		
+  	}, function(err) {
+  		navigator.notification.alert(err, null, "Failure");
+  	});
+  }
+  
+  
   
   // erstelle ein Teufelcehn
   $scope.createTeufelchen = function(pupil, index) {
@@ -72,7 +107,7 @@ angular.module('bbtf', ['ionic'])
   var createSubject = function(subjectTitle) {
     var newSubject = Subjects.newSubject(subjectTitle);
     $scope.subjects.push(newSubject);
-    Subjects.save($scope.subjects);
+		
     $scope.selectSubject(newSubject, $scope.subjects.length-1);
   }
 
@@ -135,6 +170,16 @@ angular.module('bbtf', ['ionic'])
 
   $scope.closeNewPupil = function() {
     $scope.pupilModal.hide();
+  }
+  
+  $scope.doContactPickerTest = function() {
+  	alert("Hallo1");
+	 //$scope.pupil.name = "Joe Due";	
+	 var p = {name:"John Doe"};
+	 $scope.createPupil(p);
+	 
+	 
+  	
   }
 
   $scope.toggleSubjects = function() {
