@@ -73,7 +73,7 @@
 
     <!-- Modal header bar -->
     <ion-header-bar class="bar-secondary">
-      
+      <button class="button button-clear button-positive ion-android-contacts" ng-click="doContactPicker()"></button>
       <h1 class="title">Neuer Schüler</h1>
       <button class="button button-clear button-positive" ng-click="closeNewPupil()">Cancel</button>
     </ion-header-bar>
@@ -84,8 +84,7 @@
       <form ng-submit="createPupil(pupil)">
         <div class="list">
 		
-          <label class="item item-input">
-		  <button class="button button-clear button-positive ion-android-contacts" ng-click="doContactPicker()"></button>
+          <label class="item item-input">		  
             <input type="text" placeholder="Wie heisst der Schüler?" ng-model="pupil.name">
           </label>
         </div>

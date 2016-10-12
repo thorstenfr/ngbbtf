@@ -59,12 +59,14 @@ $scope.edit = function(pupil) {
 
 // erstelle ein ratings
   $scope.createRating = function(pupil, index) {
+	  var d = new Date();
+	  var now = d.getTime();
 	  
 	 if(!$scope.activeSubject || !pupil) {
       return;
     }
 	$scope.activeSubject.pupils[index].ratings.push({
-		datum: "2016-01-31"
+		datum: now
 	});
 	
 	 // Inefficient, but save all the subjects
@@ -82,17 +84,27 @@ $scope.edit = function(pupil) {
   		navigator.notification.alert(err, null, "Failure");
   	});
   }
+
+  // Fake für WebentwicklungHole Kontakt aus Adressbuch
+  $scope.doContactPickerFake = function() {  	
+  		var p = {name: "Faki Fake"};
+	 	$scope.createPupil(p);  		
+  	
+  }
+  
   
   
   
   // erstelle ein Teufelcehn
   $scope.createTeufelchen = function(pupil, index) {
+	  var d = new Date();
+	 var now = g.getTime();
 	  
 	 if(!$scope.activeSubject || !pupil) {
       return;
     }
 	$scope.activeSubject.pupils[index].teufelchen.push({
-		datum: "2016-01-31"
+		datum: now
 	});
 	
 	 // Inefficient, but save all the subjects
