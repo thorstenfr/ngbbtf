@@ -23,15 +23,17 @@
 			<i class="icon ion-navicon"></i>			
 		</button>		
 		<h1 class="title">{{activeSubject.title}}</h1>
-		<!-- New Pupil button-->
-		<button class="button button-icon" ng-click="newPupil()">
+		
+		
+		<!-- New Pupil button-->		
+		<button class="button button-icon" ng-click="newPupil()">					
 			<i class="icon ion-compose"></i>
-		</button>
+		</button>		
       </ion-header-bar>
       <ion-content scroll="true" >
 		<!-- our list and list items -->
 		<ion-list>
-		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils" ng-click="createRating(pupil, $index)" 
+		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils | orderBy:'name'" ng-click="createRating(pupil, $index)" 
 		  on-hold="createTeufelchen(pupil, $index)">
 			{{pupil.name}}  <span class="badge badge-assertive"> {{pupil.ratings.length - pupil.teufelchen.length}} </span>
 		  <ion-option-button class="button-calm"

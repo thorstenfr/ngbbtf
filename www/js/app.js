@@ -46,9 +46,11 @@ $scope.doContactPickerTest = function() {
   	
   }
 
-$scope.edit = function(pupil) {
+
+  $scope.edit = function(pupil) {
     alert('Edit Item: ' + pupil.name);
   };
+  
   $scope.delete = function(pupil) {  	
   	$scope.activeSubject.pupils.splice($scope.activeSubject.pupils.indexOf(pupil), 1);  	
 
@@ -58,14 +60,14 @@ $scope.edit = function(pupil) {
   };
 
 // erstelle ein ratings
-  $scope.createRating = function(pupil, index) {
+  $scope.createRating = function(pupil) {
 	  var d = new Date();
-	  var now = d.getTime();
+	  var now = d.getTime();	 
 	  
 	 if(!$scope.activeSubject || !pupil) {
       return;
-    }
-	$scope.activeSubject.pupils[index].ratings.push({
+    }	
+	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].ratings.push({
 		datum: now
 	});
 	
@@ -98,12 +100,13 @@ $scope.edit = function(pupil) {
   // erstelle ein Teufelcehn
   $scope.createTeufelchen = function(pupil, index) {
 	  var d = new Date();
-	 var now = g.getTime();
+	 var now = d.getTime();
 	  
 	 if(!$scope.activeSubject || !pupil) {
       return;
     }
-	$scope.activeSubject.pupils[index].teufelchen.push({
+
+    $scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].teufelchen.push({	
 		datum: now
 	});
 	
