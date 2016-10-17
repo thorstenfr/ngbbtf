@@ -35,7 +35,7 @@ app.factory('Subjects', function() {
 
 
 
-app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate) {
+app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup) {
  
  
 
@@ -45,10 +45,49 @@ $scope.doContactPickerTest = function() {
 	 $scope.pupil.name = "Joe";	
   	
   }
+	// An alert dialog
+   $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Klasse hat Schüler!',
+       template: 'Klasse kann nur gelöscht werden, wenn sie keine Schüler hat.'
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
+   };
+   
+  
+  $scope.deleteSubject = function(subject) {  
 
+     
+	// Sicherheitshalber nur löschen, wenn keine Schüler mehr vorhanden sind
+	if($scope.subjects[$scope.subjects.indexOf(subject)].pupils.length != 0) {
+		console.log('Soll subject löschen');		
+		$scope.showAlert();
+	}
+	else {
+		$scope.subjects.splice($scope.subjects.indexOf(subject), 1);
 
-  $scope.edit = function(pupil) {
-    alert('Edit Item: ' + pupil.name);
+		// Inefficient, but save all the subjects
+		Subjects.save($scope.subjects);
+	}
+	};
+  
+  $scope.editSubject = function(subject) {				
+		$scope.subjects[$scope.subjects.indexOf(subject)].title = prompt(subject.title);		
+				
+		// Inefficient, but save all the subjects
+		Subjects.save($scope.subjects);
+		
+  };
+
+  $scope.edit = function(pupil) {				
+		
+		$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].name=prompt(pupil.name);
+				
+		// Inefficient, but save all the subjects
+		Subjects.save($scope.subjects);
+		
   };
   
   $scope.delete = function(pupil) {  	

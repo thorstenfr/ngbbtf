@@ -60,10 +60,17 @@
 	  <ion-content scroll="true">
 		<ion-list>
 		
-			<ion-item ng-repeat="subject in subjects" ng-click="selectSubject(subject, $index)" ng-class="{active: activeSubject == subject}">
+			<ion-item ng-repeat="subject in subjects" ng-click="selectSubject(subject, $index)" ng-class="{active: activeSubject == subject}" >
 			<i class="icon ion-person-stalker"></i>
 				{{subject.title}} <span class="badge badge-assertive"> {{subject.pupils.length}} </span>
-			
+			<ion-option-button class="button-calm"
+                             ng-click="editSubject(subject)">
+            Ändern
+          </ion-option-button>
+          <ion-option-button class="button-assertive"
+                             ng-click="deleteSubject(subject)">
+            Löschen
+          </ion-option-button>
 			</ion-item>
 		</ion-list>
 		</ion-content>
