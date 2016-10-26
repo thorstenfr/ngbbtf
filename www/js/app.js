@@ -5,6 +5,14 @@ var app = angular.module('bbtf', ['ionic']);
  * from local storage, and also lets us save and load the
  * last active subjects index.
  */
+ 
+ app.config(['$httpProvider', function($httpProvider) {
+ 	$httpProvider.defaults.useXDomain = true;
+ 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }
+]);
+ 
+
 app.factory('Subjects', function() {
   return {
     all: function() {
@@ -35,7 +43,26 @@ app.factory('Subjects', function() {
 
 
 
-app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup) {
+app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup, $http) {
+	
+	// Called to upload Data
+  $scope.uploadData = function() {
+
+
+  	$http({
+	    method: 'POST',
+	    url: 'http://localhost/bbtf/rest/uploaddata.php',
+	    data: {subjects: $scope.subjects},	    
+	    headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded'
+	    }
+	})
+	.success(function(data) {
+	    console.log(data);
+	});
+
+	
+ } /* uploadData() */
  
  
 
@@ -172,6 +199,8 @@ $scope.doContactPickerTest = function() {
   // Grab the last active, or the first subject
   $scope.activeSubject = $scope.subjects[Subjects.getLastActiveIndex()];
 
+  
+  
   // Called to create a new subject
   $scope.newSubject = function() {
     var subjectTitle = prompt('Klassenbezeichnung');
