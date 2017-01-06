@@ -53,14 +53,22 @@
     <!-- Left menu -->
     <ion-side-menu side="left">
       <ion-header-bar class="bar-dark">
-	  <button class="button button-icon ion-android-upload" ng-click="uploadData()">	  
+	    
         <h1 class="title">Klassen</h1>
 		<button class="button button-icon ion-plus" ng-click="newSubject()">
 		</button>
       </ion-header-bar>
+	<ion-footer-bar class="bar-dark">
+	<div class="button-bar">
+		<button class="button button-icon ion-upload" ng-click="uploadData()">
+		</button>
+		<button class="button button-icon ion-edit" ng-click="changeUploadDest()">
+		</button>
+	</div>
+  	</ion-footer-bar>
 	  <ion-content scroll="true">
-		<ion-list>
 		
+		<ion-list>	
 			<ion-item ng-repeat="subject in subjects" ng-click="selectSubject(subject, $index)" ng-class="{active: activeSubject == subject}" >
 			<i class="icon ion-person-stalker"></i>
 				{{subject.title}} <span class="badge badge-assertive"> {{subject.pupils.length}} </span>
@@ -74,7 +82,9 @@
           </ion-option-button>
 			</ion-item>
 		</ion-list>
+		
 		</ion-content>
+		
     </ion-side-menu>
 	
 	<script id="new-pupil.html" type="text/ng-template">

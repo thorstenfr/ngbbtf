@@ -16,6 +16,7 @@ var app = angular.module('bbtf', ['ionic']);
 app.factory('Subjects', function() {
   return {
     all: function() {
+	  
       var subjectString = window.localStorage['subjects'];
       if(subjectString) {
         return angular.fromJson(subjectString);
@@ -24,6 +25,7 @@ app.factory('Subjects', function() {
     },
     save: function(subjects) {
       window.localStorage['subjects'] = angular.toJson(subjects);
+	  
     },
     newSubject: function(subjectTitle) {
       // Add a new subject
@@ -47,6 +49,14 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
 	
 	// Called to upload Data
   $scope.uploadData = function() {
+	  $scope.url = localStorage.url;
+	  if (!$scope.url) {
+	  	$scope.url = "http://localhost/bbtf/rest/uploaddata.php";
+		localStorage.url = $scope.url;
+	  }
+	  alert("Upload-Url: " + $scope.url);
+	  
+	  /*
 
 
   	$http({
@@ -61,7 +71,7 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
 	    console.log(data);
 	});
 
-	
+	*/
  } /* uploadData() */
  
  
@@ -190,7 +200,7 @@ $scope.doContactPickerTest = function() {
     $scope.subjects.push(newSubject);
 		
     $scope.selectSubject(newSubject, $scope.subjects.length-1);
-  }
+  };
 
 
   // Load or initialize subjects
@@ -200,7 +210,13 @@ $scope.doContactPickerTest = function() {
   $scope.activeSubject = $scope.subjects[Subjects.getLastActiveIndex()];
 
   
-  
+  // Called to change the configuration
+  $scope.changeUploadDest = function() {
+	  var text = "Upload-URL: " + $scope.url;
+	  $scope.url = prompt(text);
+	  localStorage.url = $scope.url ;
+	  
+  }
   // Called to create a new subject
   $scope.newSubject = function() {
     var subjectTitle = prompt('Klassenbezeichnung');
