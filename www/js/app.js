@@ -54,14 +54,14 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
 	  	$scope.url = "http://localhost/bbtf/rest/uploaddata.php";
 		localStorage.url = $scope.url;
 	  }
-	  alert("Upload-Url: " + $scope.url);
 	  
-	  /*
+	  
+	  
 
 
   	$http({
 	    method: 'POST',
-	    url: 'http://localhost/bbtf/rest/uploaddata.php',
+	    url: $scope.url,
 	    data: {subjects: $scope.subjects},	    
 	    headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded'
@@ -71,7 +71,7 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
 	    console.log(data);
 	});
 
-	*/
+	
  } /* uploadData() */
  
  
