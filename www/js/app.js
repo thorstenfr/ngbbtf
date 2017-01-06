@@ -51,17 +51,14 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
   $scope.uploadData = function() {
 	  $scope.url = localStorage.url;
 	  if (!$scope.url) {
-	  	$scope.url = "http://localhost/bbtf/rest/uploaddata.php";
+	  	$scope.url = "localhost";
 		localStorage.url = $scope.url;
 	  }
-	  
-	  
-	  
-
-
-  	$http({
+	  var restsrv = "http://" + $scope.url + "/bbtf/rest/uploaddata.php";
+	  alert(restsrv);
+	  $http({
 	    method: 'POST',
-	    url: $scope.url,
+	    url: restsrv,
 	    data: {subjects: $scope.subjects},	    
 	    headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded'
@@ -212,7 +209,7 @@ $scope.doContactPickerTest = function() {
   
   // Called to change the configuration
   $scope.changeUploadDest = function() {
-	  var text = "Upload-URL: " + $scope.url;
+	  var text = "Server: " + $scope.url;
 	  $scope.url = prompt(text);
 	  localStorage.url = $scope.url ;
 	  
