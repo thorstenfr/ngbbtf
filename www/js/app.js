@@ -47,6 +47,10 @@ app.factory('Subjects', function() {
 
 app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup, $http) {
 	
+	$scope.orderByMe = function(x) {
+	        $scope.myOrderBy = x;
+	    }
+		
 	// Called to upload Data
   $scope.uploadData = function() {
 	  $scope.url = localStorage.url;
