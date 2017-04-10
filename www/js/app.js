@@ -144,6 +144,9 @@ $scope.doContactPickerTest = function() {
 	 if(!$scope.activeSubject || !pupil) {
       return;
     }	
+	// Erhöhe die Bienchen
+	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen = $scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen + 1;
+	// Füge Rating in die Liset ein
 	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].ratings.push({
 		datum: now
 	});
@@ -174,7 +177,7 @@ $scope.doContactPickerTest = function() {
   
   
   
-  // erstelle ein Teufelcehn
+  // erstelle ein Teufelchen
   $scope.createTeufelchen = function(pupil, index) {
 	  var d = new Date();
 	 var now = d.getTime();
@@ -183,6 +186,8 @@ $scope.doContactPickerTest = function() {
       return;
     }
 
+	// Reduziere die Bienchen
+	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen = $scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen - 1;
     $scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].teufelchen.push({	
 		datum: now
 	});
@@ -252,9 +257,11 @@ $scope.doContactPickerTest = function() {
       return;
     }
     $scope.activeSubject.pupils.push({
-      name: pupil.name, 
+      name: pupil.name,
+	  bienchen : 0, 
 	  ratings: [],
 	  teufelchen: []
+		
     });
     $scope.pupilModal.hide();
 

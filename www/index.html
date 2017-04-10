@@ -35,7 +35,8 @@
 		<ion-list>
 		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils | orderBy:myOrderBy" ng-click="createRating(pupil, $index)" 
 		  on-hold="createTeufelchen(pupil, $index)">
-			{{pupil.name}}  <span class="badge badge-assertive"> {{pupil.ratings.length - pupil.teufelchen.length}} </span>
+		{{pupil.name}}  <span class="badge badge-assertive"> {{pupil.bienchen}} </span>
+
 		  <ion-option-button class="button-calm"
                              ng-click="edit(pupil)">
             Ändern
@@ -51,7 +52,7 @@
 	  	<ion-footer-bar class="bar-dark">
 			<button ng-click="orderByMe('name')">A-z</button>
 			<button ng-click="orderByMe('-name')">Z-a</button>
-			<button ng-click="orderByMe('-ratings')">Ratings</button>
+			<button ng-click="orderByMe('-bienchen')">Ratings</button>
   		</ion-footer-bar>
     </ion-side-menu-content>
 
