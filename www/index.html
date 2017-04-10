@@ -35,8 +35,10 @@
 		<ion-list>
 		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils | orderBy:myOrderBy" ng-click="createRating(pupil, $index)" 
 		  on-hold="createTeufelchen(pupil, $index)">
-		{{pupil.name}}  <span class="badge badge-assertive"> {{pupil.bienchen}} </span>
-
+		{{pupil.name}}   <span class="badge badge-assertive"> {{pupil.bienchen}} </span>
+		<div ng-show="myShow">
+			<pre ng-repeat="x in pupil.ratings">{{ x.datum | date: 'yyyy-MM-dd hh-mm-ss' }} </pre> 
+		</div>
 		  <ion-option-button class="button-calm"
                              ng-click="edit(pupil)">
             Ändern
@@ -45,6 +47,8 @@
                              ng-click="delete(pupil)">
             Löschen
           </ion-option-button>
+		 
+		  
 		  </ion-item>
 		  
 		</ion-list>
@@ -53,6 +57,14 @@
 			<button ng-click="orderByMe('name')">A-z</button>
 			<button ng-click="orderByMe('-name')">Z-a</button>
 			<button ng-click="orderByMe('-bienchen')">Ratings</button>
+			Show Details: <input type="checkbox" ng-model="myShow">
+			<button ng-click="filterByName()">Filter Name</button>
+			<button ng-click="filterByDate()">Filter Datum</button>
+			
+			<label class="item item-input">
+			  <span class="input-label">Bis</span>
+			  <input type="date">
+			</label>
   		</ion-footer-bar>
     </ion-side-menu-content>
 

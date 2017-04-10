@@ -50,6 +50,12 @@ app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $io
 	$scope.orderByMe = function(x) {
 	        $scope.myOrderBy = x;
 	    }
+		$scope.filterByName = function() {
+			
+		}
+		$scope.filterByDate = function() {
+			
+		}
 		
 	// Called to upload Data
   $scope.uploadData = function() {
