@@ -11,7 +11,7 @@ var app = angular.module('bbtf', ['ionic']);
  	delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }
 ]);
- 
+
 
 app.factory('Subjects', function() {
   return {
@@ -45,17 +45,13 @@ app.factory('Subjects', function() {
 
 
 
-app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup, $http) {
-	
+app.controller('BbtfCtrl', function($scope, $timeout, $ionicModal, Subjects, $ionicSideMenuDelegate, $ionicPopup, $http, $log) {
+ 
+	// Filter zum Sortieren nach Name oder Bienchen 
 	$scope.orderByMe = function(x) {
 	        $scope.myOrderBy = x;
-	    }
-		$scope.filterByName = function() {
-			
-		}
-		$scope.filterByDate = function() {
-			
-		}
+	    };
+		
 		
 	// Called to upload Data
   $scope.uploadData = function() {
@@ -150,12 +146,12 @@ $scope.doContactPickerTest = function() {
 	 if(!$scope.activeSubject || !pupil) {
       return;
     }	
-	// Erhöhe die Bienchen
+	// Bienchen-Anzahl anpassen
 	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen = $scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].bienchen + 1;
 	// Füge Rating in die Liset ein
 	$scope.activeSubject.pupils[$scope.activeSubject.pupils.indexOf(pupil)].ratings.push({
 		datum: now
-	});
+		});
 	
 	 // Inefficient, but save all the subjects
     Subjects.save($scope.subjects);
@@ -180,8 +176,7 @@ $scope.doContactPickerTest = function() {
   	
   }
   
-  
-  
+ 
   
   // erstelle ein Teufelchen
   $scope.createTeufelchen = function(pupil, index) {

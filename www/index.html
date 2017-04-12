@@ -31,13 +31,20 @@
 		</button>		
       </ion-header-bar>
       <ion-content scroll="true" >
+	 
 		<!-- our list and list items -->
 		<ion-list>
-		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils | orderBy:myOrderBy" ng-click="createRating(pupil, $index)" 
-		  on-hold="createTeufelchen(pupil, $index)">
-		{{pupil.name}}   <span class="badge badge-assertive"> {{pupil.bienchen}} </span>
+		  <ion-item class="item-remove-animate" ng-repeat="pupil in activeSubject.pupils |  orderBy:myOrderBy" ng-click="createRating(pupil)" 
+		  on-hold="createTeufelchen(pupil)">
+		{{pupil.name}} <span class="badge badge-assertive"> {{bienchen.length - teufelchen.length}} </span>
+		<!--alle Bienchen und alle Teufelchen ausgeben -->
 		<div ng-show="myShow">
-			<pre ng-repeat="x in pupil.ratings">{{ x.datum | date: 'yyyy-MM-dd hh-mm-ss' }} </pre> 
+		
+		<p>Bienchen {{bienchen.length}}</p>
+		<pre ng-repeat="x in pupil.ratings | filter:isBigSpender | filter:q as bienchen " >{{ x.datum }}</pre>
+		<p>Teufelchen {{teufelchen.length}}</p>
+		<pre ng-repeat="x in pupil.teufelchen | filter:q as teufelchen ">{{x.datum}} - {{ x.datum | date: 'yyyy-MM-dd hh-mm-ss' }}</pre>
+				
 		</div>
 		  <ion-option-button class="button-calm"
                              ng-click="edit(pupil)">
@@ -51,20 +58,15 @@
 		  
 		  </ion-item>
 		  
-		</ion-list>
+		</ion-list> 
+		
+	
       </ion-content>
 	  	<ion-footer-bar class="bar-dark">
 			<button ng-click="orderByMe('name')">A-z</button>
 			<button ng-click="orderByMe('-name')">Z-a</button>
 			<button ng-click="orderByMe('-bienchen')">Ratings</button>
-			Show Details: <input type="checkbox" ng-model="myShow">
-			<button ng-click="filterByName()">Filter Name</button>
-			<button ng-click="filterByDate()">Filter Datum</button>
-			
-			<label class="item item-input">
-			  <span class="input-label">Bis</span>
-			  <input type="date">
-			</label>
+			Show Details: <input type="checkbox" ng-model="myShow">		
   		</ion-footer-bar>
     </ion-side-menu-content>
 
